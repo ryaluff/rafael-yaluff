@@ -169,7 +169,6 @@
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-lang="en">English</button>
           <button type="button" data-lang="es">Español</button>
-          <button type="button" data-lang="de">Deutsch</button>
         </div>
       </div>
       <h1 id="page-title">Recent Work</h1>
@@ -186,17 +185,16 @@
     <script>
       const text = {
         en: { back: '← Back', title: 'Recent Work', error: 'Unable to load paintings.', alt: 'Recent work artwork' },
-        es: { back: '← Volver', title: 'Pintura Reciente', error: 'No se pudieron cargar las pinturas.', alt: 'Obra reciente' },
-        de: { back: '← Zurück', title: 'Aktuelle Werke', error: 'Die Gemälde konnten nicht geladen werden.', alt: 'Aktuelles Kunstwerk' }
+        es: { back: '← Volver', title: 'Pintura Reciente', error: 'No se pudieron cargar las pinturas.', alt: 'Obra reciente' }
       };
-      const supported = ['en', 'es', 'de'];
+      const supported = ['en', 'es'];
       let lang = 'en';
       try {
         const saved = localStorage.getItem('archive-lang');
         if (supported.includes(saved)) lang = saved;
       } catch (e) {}
 
-      // Fields may be a plain string or an object like { en, es, de }; fall back to English.
+      // Fields may be a plain string or an object like { en, es }; fall back to English.
       const pick = (value) => {
         if (value && typeof value === 'object') return value[lang] || value.en || '';
         return value || '';
