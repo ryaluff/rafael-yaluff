@@ -1,0 +1,32 @@
+{
+  "paintings": [
+    {
+      "id": "deriva",
+      "image": "images/recent-work/1) deriva.jpg"
+    },
+    {
+      "id": "anunciacion",
+      "image": "images/recent-work/2) anunciacion.jpg"
+    },
+    {
+      "id": "phill-2",
+      "image": "images/recent-work/3) phill 2.jpg"
+    },
+    {
+      "id": "phill-3",
+      "image": "images/recent-work/4) phill 3.jpg"
+    },
+    {
+      "id": "phill-4",
+      "image": "images/recent-work/5) Phill 4.jpg"
+    },
+    {
+      "id": "vaqueros",
+      "image": "images/recent-work/6) vaqueros.jpg"
+    },
+    {
+      "id": "charlie-brown",
+      "image": "images/recent-work/7) chrlie brown.jpg"
+    }
+  ]
+}

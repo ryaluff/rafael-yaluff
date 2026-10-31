@@ -185,9 +185,9 @@
 
     <script>
       const text = {
-        en: { back: '← Back', title: 'Recent Work', error: 'Unable to load paintings.', alt: 'Expanded painting view' },
-        es: { back: '← Volver', title: 'Pintura Reciente', error: 'No se pudieron cargar las pinturas.', alt: 'Vista ampliada de la pintura' },
-        de: { back: '← Zurück', title: 'Aktuelle Werke', error: 'Die Gemälde konnten nicht geladen werden.', alt: 'Vergrößerte Ansicht des Gemäldes' }
+        en: { back: '← Back', title: 'Recent Work', error: 'Unable to load paintings.', alt: 'Recent work artwork' },
+        es: { back: '← Volver', title: 'Pintura Reciente', error: 'No se pudieron cargar las pinturas.', alt: 'Obra reciente' },
+        de: { back: '← Zurück', title: 'Aktuelle Werke', error: 'Die Gemälde konnten nicht geladen werden.', alt: 'Aktuelles Kunstwerk' }
       };
       const supported = ['en', 'es', 'de'];
       let lang = 'en';
@@ -239,17 +239,19 @@
           const card = document.createElement('article');
           card.className = 'painting';
           card.innerHTML = `
-            <img src="${painting.image}" alt="${title}" />
-            <div class="painting-info">
-              <h2>${title}</h2>
-              <div class="meta">${meta}<br>${dimensions}</div>
-              ${description ? `<div class="description">${description}</div>` : ''}
-            </div>
+            <img src="${painting.image}" alt="${title || text[lang].alt}" />
+            ${title || meta || dimensions || description ? `
+              <div class="painting-info">
+                ${title ? `<h2>${title}</h2>` : ''}
+                ${meta || dimensions ? `<div class="meta">${meta}${meta && dimensions ? '<br>' : ''}${dimensions}</div>` : ''}
+                ${description ? `<div class="description">${description}</div>` : ''}
+              </div>
+            ` : ''}
           `;
 
           card.querySelector('img').addEventListener('click', () => {
             lightboxImage.src = painting.image;
-            lightboxImage.alt = title;
+            lightboxImage.alt = title || text[lang].alt;
             lightbox.classList.add('open');
             lightbox.setAttribute('aria-hidden', 'false');
           });
@@ -277,7 +279,7 @@
         if (event.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
       });
 
-      fetch('paintings.json')
+      fetch('recent-work.json')
         .then(res => res.json())
         .then(data => { paintings = data.paintings; })
         .catch(() => { failed = true; })
